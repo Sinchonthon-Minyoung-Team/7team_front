@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import About from "./pages/Board/About";
 import Article from "./pages/Board/Article";
+
 import MakePetition from "./pages/Board/MakePetition";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             </Router>
         </>
     );
+
 }
 
 export default App;
