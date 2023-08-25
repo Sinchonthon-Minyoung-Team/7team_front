@@ -1,10 +1,65 @@
 import Menu from "../../components/Menu";
 import PetitionCard from "../../components/PetitonCard";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
+import axios from "axios";
+import { getCookie } from "../../API/Cookie";
 import Categorybar from "../../components/Categorybar";
+import { useEffect, useState } from "react";
 
 function MakePetition() {
+    const [newPostData, setNewPostData] = useState({
+        title: "",
+        category: "",
+        content: "",
+        duration: "",
+    });
+    const [ca, setCa] = useState("");
+
+    const { title, category, content, duration } = newPostData;
+    const onChange = (event) => {
+        const { name, value } = event.target;
+        console.log(name);
+        setNewPostData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleCategory = (cate) => {
+        setNewPostData((prevData) => ({
+            ...prevData,
+            category: cate,
+        }));
+    };
+
+    const navigate = useNavigate();
+    const access = getCookie("accessToken");
+    const onClick = async (event) => {
+        event.preventDefault();
+
+        try {
+            const res = await axios.post(
+                `${process.env.REACT_APP_BaseUrl}/posts/`,
+                {
+                    title: title,
+                    category: category,
+                    content: content,
+                    duration: 30,
+                },
+                { headers: { Authorization: `Bearer ${access}` } }
+            );
+            if (res.status === 200 || res.status === 201) {
+                alert("글 등록이 완료되었습니다!");
+                navigate("/");
+            } else {
+                alert("등록에 실패했습니다. 다시 시도해주세요.");
+            }
+        } catch (error) {
+            alert("오류가 발생했습니다. 다시 시도해주세요.");
+        }
+    };
     return (
         <>
             <Wrapper>
@@ -16,17 +71,49 @@ function MakePetition() {
                         <div className="title">이유 및 내용</div>
                     </ContentTitle>
                     <Contents>
-                        <input className="putTitle"></input>
+                        <input
+                            className="putTitle"
+                            name="title"
+                            value={title}
+                            onChange={onChange}
+                        ></input>
                         <CategoryBox>
-                            <div className="box">증원</div>
-                            <div className="box">커리큘럼</div>
-                            <div className="box">교수님</div>
-                            <div className="box">기타</div>
+                            <div
+                                className="box"
+                                onClick={() => handleCategory("MO")}
+                            >
+                                증원
+                            </div>
+                            <div
+                                className="box"
+                                onClick={() => handleCategory("CU")}
+                            >
+                                커리큘럼
+                            </div>
+                            <div
+                                className="box"
+                                onClick={() => handleCategory("PR")}
+                            >
+                                교수님
+                            </div>
+                            <div
+                                className="box"
+                                onClick={() => handleCategory("ET")}
+                            >
+                                기타
+                            </div>
                         </CategoryBox>
-                        <input className="putReason"></input>
+                        <input
+                            className="putReason"
+                            name="content"
+                            value={content}
+                            onChange={onChange}
+                        ></input>
                     </Contents>
                 </Container>
-                <div className="box">제출하기</div>
+                <div className="box" onClick={onClick}>
+                    제출하기
+                </div>
             </Wrapper>
         </>
     );
