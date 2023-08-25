@@ -20,12 +20,21 @@ import DonutChart from "react-donut-chart";
 //     passed: number,
 // };
 
-const PetitionCard = ({ agreeNum, leftDate }) => {
+const PetitionCard = ({ type, agreeNum, leftDate }) => {
     const fillPercentage = (agreeNum / 30) * 100;
 
     return (
         <>
-            <Wrapper>
+            <Wrapper
+                style={{
+                    backgroundColor:
+                        type === "progress"
+                            ? "white"
+                            : type === "done"
+                            ? "rgba(0,0,0,0.4)"
+                            : null,
+                }}
+            >
                 <Container>
                     <div className="title">제목</div>
                     <div className="content">청원 내용</div>
@@ -37,9 +46,11 @@ const PetitionCard = ({ agreeNum, leftDate }) => {
                     <LevelBar>
                         <FilledBar fillPercentage={fillPercentage} />
                     </LevelBar>
-                    <DayCircle>
-                        <img src={dayCircle} />
-                    </DayCircle>
+                    {type === "progress" && (
+                        <DayCircle>
+                            <img src={dayCircle} />
+                        </DayCircle>
+                    )}
                 </UnderBar>
             </Wrapper>
         </>
@@ -50,12 +61,6 @@ export default PetitionCard;
 const Wrapper = styled.div`
     width: 566px;
     height: 192px;
-    background-color: ${(props) =>
-        props.type === "progress"
-            ? "white"
-            : props.type === "done"
-            ? "black)"
-            : "white"};
     border: 1px solid var(--light-mode-stroke, #e5e5e5);
     display: flex;
     flex-direction: column;

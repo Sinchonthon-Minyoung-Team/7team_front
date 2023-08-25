@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import About from "./pages/Board/About";
 import Article from "./pages/Board/Article";
+import MakePetition from "./pages/Board/MakePetition";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                     />
                     <Route path="/done" element={<Article type="done" />} />
                     <Route path="/sent" element={<Article type="sent" />} />
+                    <Route path="/makepetition" element={<MakePetition />} />
                 </Routes>
             </Router>
         </>
