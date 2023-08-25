@@ -14,13 +14,13 @@ const LoginPage = () => {
     };
     useEffect(() => {
         const parsedHash = new URLSearchParams(window.location.search);
-        const accessToken = parsedHash.get("code");
-        console.log(accessToken);
+        const code = parsedHash.get("code");
+        console.log(code);
         // Make an API request using Axios
         const fetchData = async () => {
             try {
                 const response = await axios.post("/auth/google/token", {
-                    accessToken,
+                    code,
                 });
                 const { data } = response.data;
                 console.log(response);
@@ -29,7 +29,7 @@ const LoginPage = () => {
             }
         };
 
-        if (accessToken) {
+        if (code) {
             fetchData();
         }
     }, []);
