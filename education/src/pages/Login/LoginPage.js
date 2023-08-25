@@ -9,19 +9,17 @@ const LoginPage = () => {
             "https://accounts.google.com/o/oauth2/auth?" +
             "client_id=670470419742-dntothjjjgs985sa8vr2nfkv1o3e37t2.apps.googleusercontent.com&" +
             "redirect_uri=http://localhost:3000/loginpage&" +
-            "response_type=token&" +
+            "response_type=code&" +
             "scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile";
     };
     useEffect(() => {
-        const parsedHash = new URLSearchParams(
-            window.location.hash.substring(1)
-        );
-        const accessToken = parsedHash.get("access_token");
+        const parsedHash = new URLSearchParams(window.location.search);
+        const accessToken = parsedHash.get("code");
         console.log(accessToken);
         // Make an API request using Axios
         const fetchData = async () => {
             try {
-                const response = await axios.post("/auth/{provider}/token", {
+                const response = await axios.post("/auth/google/token", {
                     accessToken,
                 });
                 const { data } = response.data;
