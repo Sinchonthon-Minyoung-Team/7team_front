@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import dayCircle from "./images_comp/dayCircle.png";
+import completeIcon from "./images_comp/completeIcon.png";
 import DonutChart from "react-donut-chart";
 
 // const FilledCircle = ({ leftDate }) => (
@@ -31,20 +32,35 @@ const PetitionCard = ({ type, agreeNum, leftDate }) => {
                         type === "progress"
                             ? "white"
                             : type === "done"
-                            ? "rgba(0,0,0,0.4)"
+                            ? "rgba(0,0,0,0.7)"
                             : null,
                 }}
             >
                 <Container>
-                    <div className="title">제목</div>
-                    <div className="content">청원 내용</div>
+                    <div class="wrap">
+                        <div className="title">제목</div>
+                        <div className="content">청원 내용</div>
+                    </div>
+                    {type === "sent" && (
+                        <img className="completeIcon" src={completeIcon} />
+                    )}
                 </Container>
                 <UnderBar>
                     <div className="info">
                         학과 학번 <br /> Jan 09, 2020 05:00
                     </div>
                     <LevelBar>
-                        <FilledBar fillPercentage={fillPercentage} />
+                        <FilledBar
+                            style={{
+                                backgroundColor:
+                                    type === "progress"
+                                        ? "#00c42b"
+                                        : type === "done"
+                                        ? "red"
+                                        : null,
+                            }}
+                            fillPercentage={fillPercentage}
+                        />
                     </LevelBar>
                     {type === "progress" && (
                         <DayCircle>
@@ -65,11 +81,17 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     margin: 10px;
-    z-index: 10;
+    border-radius: 3px;
+    .completeIcon {
+        width: 50px;
+        height: 50px;
+        position: relative;
+        left: 390px;
+    }
 `;
 const Container = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     color: black;
     height: 100px;
     margin: 20px 0 0 20px;
@@ -107,7 +129,7 @@ const FilledBar = styled.div`
     display: flex;
     height: 100%;
     border-radius: 4px;
-    background-color: #00c42b;
+    /* background-color: #00c42b; */
     width: ${(props) => props.fillPercentage}%;
 `;
 // const DayCircle = styled.div`
