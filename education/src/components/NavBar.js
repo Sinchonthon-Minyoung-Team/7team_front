@@ -1,15 +1,19 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Menu from "./Menu";
 
 function NavBar() {
   return (
-    <NavContainer>
-      <Logo to="/">UNIVPET</Logo>
-      <UserContainer>
-        <MyPage to="/mypage">마이페이지</MyPage>
-        <Sign to="/signup">회원가입 / 로그인</Sign>
-      </UserContainer>
-    </NavContainer>
+    <>
+      <NavContainer>
+        <Logo to="/">UNIVPET</Logo>
+        <UserContainer>
+          <MyPage to="/mypage">마이페이지</MyPage>
+          <Sign to="/signup">회원가입 / 로그인</Sign>
+        </UserContainer>
+      </NavContainer>
+      <Menu />
+    </>
   );
 }
 
