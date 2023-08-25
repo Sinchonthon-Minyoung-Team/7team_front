@@ -4,6 +4,7 @@ import { useEffect } from "react";
 // import GoogleButton from "../../components/Login/GoogleButton";
 
 const LoginPage = () => {
+
     const gotoLogin = () => {
         window.location.href =
             "https://accounts.google.com/o/oauth2/auth?" +
@@ -34,10 +35,11 @@ const LoginPage = () => {
         }
     }, []);
 
-    return (
-        <>
-            <button onClick={gotoLogin} className="google_btn"></button>
-        </>
-    );
+
+  return (
+    <>
+      <button onClick={gotoLogin} className="google_btn"></button>
+    </>
+  );
 };
 export default LoginPage;
