@@ -7,7 +7,6 @@ import Categorybar from "../../components/Categorybar";
 function Article(props) {
     return (
         <>
-            <Menu />
             <Wrapper>
                 <Categorybar />
                 <Cards>
