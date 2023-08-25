@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { getCookie } from "../API/Cookie";
 
 function SignUp() {
   const [registerData, setRegisterData] = useState({
@@ -24,18 +25,21 @@ function SignUp() {
 
   const navigate = useNavigate();
 
+  const access = getCookie("accessToken");
+
   const onClick = async (event) => {
     event.preventDefault();
 
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BaseUrl}/accounts`,
+        `${process.env.REACT_APP_BaseUrl}/accounts/`,
         {
           unviersity: univ,
           student_id: studentID,
           name: userName,
           major: major,
-        }
+        },
+        { headers: { Authorization: `Bearer ${access}` } }
       );
 
       if (res.status === 200) {
