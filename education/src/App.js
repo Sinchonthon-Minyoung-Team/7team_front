@@ -5,7 +5,10 @@ import HomePage from "./pages/HomePage";
 import About from "./pages/Board/About";
 import Article from "./pages/Board/Article";
 
+import PetitionCard from "./components/PetitonCard";
+
 function App() {
+
   return (
     <>
       <Router>
@@ -21,6 +24,7 @@ function App() {
       </Router>
     </>
   );
+
 }
 
 export default App;
