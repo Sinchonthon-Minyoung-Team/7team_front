@@ -67,7 +67,7 @@ function HomePage() {
         <Button to="/write">동의하기</Button>
       </ButtonConatiner>
 
-      <SearchBar />
+            <SearchBar />
 
       <BottomContainer>
         <RadioBtnContainer>
@@ -104,32 +104,32 @@ export default HomePage;
 const Container = styled.div``;
 
 const ButtonConatiner = styled.div`
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 `;
 
 const Button = styled(Link)`
-  text-decoration: none;
+    text-decoration: none;
 
-  display: flex;
-  width: 200px;
-  height: 58px;
-  padding: 11.5px 32px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
+    display: flex;
+    width: 200px;
+    height: 58px;
+    padding: 11.5px 32px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 
-  border-radius: 3px;
-  background: var(--light-mode-primary-blue, #009aff);
+    border-radius: 3px;
+    background: var(--light-mode-primary-blue, #009aff);
 
-  color: var(--light-mode-white-background, #fff);
-  text-align: center;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+    color: var(--light-mode-white-background, #fff);
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 
-  margin: auto 15px;
+    margin: auto 15px;
 `;
 
 const ArticleContainer = styled.div`
@@ -140,7 +140,7 @@ const ArticleContainer = styled.div`
 const BottomContainer = styled.div``;
 
 const RadioBtnContainer = styled.div`
-  width: 80%;
-  display: flex;
-  justify-content: right;
+    width: 80%;
+    display: flex;
+    justify-content: right;
 `;

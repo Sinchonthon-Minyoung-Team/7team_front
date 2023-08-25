@@ -8,6 +8,7 @@ import axios from "axios";
 import { getCookie } from "../../API/Cookie";
 
 function Article(props) {
+
   const [registerData, setRegisterData] = useState([]);
   const access = getCookie("accessToken");
 
@@ -22,9 +23,9 @@ function Article(props) {
     }
   };
 
-  useEffect(() => {
-    getArticle();
-  }, []);
+    useEffect(() => {
+        getArticle();
+    }, []);
 
   const art1 = registerData
     .slice(0, 3)
@@ -65,17 +66,18 @@ function Article(props) {
       {props.type}
     </>
   );
+
 }
 
 export default Article;
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 90vw;
-  justify-content: center;
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    justify-content: center;
 `;
 const Cards = styled.div`
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 `;
