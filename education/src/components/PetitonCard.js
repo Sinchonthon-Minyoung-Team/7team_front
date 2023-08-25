@@ -21,116 +21,116 @@ import DonutChart from "react-donut-chart";
 //     passed: number,
 // };
 
-const PetitionCard = ({ type, agreeNum, leftDate }) => {
-    const fillPercentage = (agreeNum / 30) * 100;
+const PetitionCard = ({ type, agreeNum, leftDate, title, content, date }) => {
+  const fillPercentage = (agreeNum / 30) * 100;
 
-    return (
-        <>
-            <Wrapper
-                style={{
-                    backgroundColor:
-                        type === "progress"
-                            ? "white"
-                            : type === "done"
-                            ? "rgba(0,0,0,0.7)"
-                            : null,
-                }}
-            >
-                <Container>
-                    <div class="wrap">
-                        <div className="title">제목</div>
-                        <div className="content">청원 내용</div>
-                    </div>
-                    {type === "sent" && (
-                        <img className="completeIcon" src={completeIcon} />
-                    )}
-                </Container>
-                <UnderBar>
-                    <div className="info">
-                        학과 학번 <br /> Jan 09, 2020 05:00
-                    </div>
-                    <LevelBar>
-                        <FilledBar
-                            style={{
-                                backgroundColor:
-                                    type === "progress"
-                                        ? "#00c42b"
-                                        : type === "done"
-                                        ? "red"
-                                        : null,
-                            }}
-                            fillPercentage={fillPercentage}
-                        />
-                    </LevelBar>
-                    {type === "progress" && (
-                        <DayCircle>
-                            <img src={dayCircle} />
-                        </DayCircle>
-                    )}
-                </UnderBar>
-            </Wrapper>
-        </>
-    );
+  return (
+    <>
+      <Wrapper
+        style={{
+          backgroundColor:
+            type === "progress"
+              ? "white"
+              : type === "done"
+              ? "rgba(0,0,0,0.7)"
+              : null,
+        }}
+      >
+        <Container>
+          <div class="wrap">
+            <div className="title">{title}</div>
+            <div className="content">{content}</div>
+          </div>
+          {type === "sent" && (
+            <img className="completeIcon" src={completeIcon} />
+          )}
+        </Container>
+        <UnderBar>
+          <div className="info">
+            학과 학번 <br /> {date}
+          </div>
+          <LevelBar>
+            <FilledBar
+              style={{
+                backgroundColor:
+                  type === "progress"
+                    ? "#00c42b"
+                    : type === "done"
+                    ? "red"
+                    : null,
+              }}
+              fillPercentage={fillPercentage}
+            />
+          </LevelBar>
+          {type === "progress" && (
+            <DayCircle>
+              <img src={dayCircle} />
+            </DayCircle>
+          )}
+        </UnderBar>
+      </Wrapper>
+    </>
+  );
 };
 export default PetitionCard;
 
 const Wrapper = styled.div`
-    width: 566px;
-    height: 192px;
-    border: 1px solid var(--light-mode-stroke, #e5e5e5);
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-    border-radius: 3px;
-    .completeIcon {
-        width: 50px;
-        height: 50px;
-        position: relative;
-        left: 390px;
-    }
+  width: 566px;
+  height: 192px;
+  border: 1px solid var(--light-mode-stroke, #e5e5e5);
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  border-radius: 3px;
+  .completeIcon {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    left: 390px;
+  }
 `;
 const Container = styled.div`
-    display: flex;
-    flex-direction: row;
-    color: black;
-    height: 100px;
-    margin: 20px 0 0 20px;
-    .title {
-        font-size: 24px;
-        font-weight: 600;
-    }
-    .content {
-        font-size: 20px;
-        font-weight: 400;
-    }
+  display: flex;
+  flex-direction: row;
+  color: black;
+  height: 100px;
+  margin: 20px 0 0 20px;
+  .title {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .content {
+    font-size: 20px;
+    font-weight: 400;
+  }
 `;
 const UnderBar = styled.div`
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    margin-left: 5px;
-    .info {
-        color: #4d00b4;
-        font-size: 16px;
-        font-weight: 600;
-    }
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin-left: 5px;
+  .info {
+    color: #4d00b4;
+    font-size: 16px;
+    font-weight: 600;
+  }
 `;
 const LevelBar = styled.div`
-    width: 252px;
-    height: 8px;
-    display: flex;
-    background-color: #e5e5e5;
-    border-radius: 4px;
+  width: 252px;
+  height: 8px;
+  display: flex;
+  background-color: #e5e5e5;
+  border-radius: 4px;
 `;
 const FilledBar = styled.div`
-    display: flex;
-    height: 100%;
-    border-radius: 4px;
-    /* background-color: #00c42b; */
-    width: ${(props) => props.fillPercentage}%;
+  display: flex;
+  height: 100%;
+  border-radius: 4px;
+  /* background-color: #00c42b; */
+  width: ${(props) => props.fillPercentage}%;
 `;
 // const DayCircle = styled.div`
 //     width: 58px;
