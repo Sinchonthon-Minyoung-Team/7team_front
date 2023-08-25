@@ -3,12 +3,12 @@ import PetitionCard from "../../components/PetitonCard";
 import styled from "styled-components";
 
 import Categorybar from "../../components/Categorybar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { getCookie } from "../../API/Cookie";
 
 function Article(props) {
-  
+  const [registerData, setRegisterData] = useState([]);
   const access = getCookie("accessToken");
 
   const getArticle = async () => {
@@ -16,7 +16,7 @@ function Article(props) {
       const res = await axios.get(`${process.env.REACT_APP_BaseUrl}/posts/`, {
         headers: { Authorization: `Bearer ${access}` },
       });
-      console.log(res.data);
+      setRegisterData(res.data);
     } catch (error) {
       alert("오류가 발생했습니다. 다시 시도해주세요.");
     }
@@ -26,26 +26,45 @@ function Article(props) {
     getArticle();
   }, []);
 
+  const art1 = registerData
+    .slice(0, 3)
+    .map((data, index) => (
+      <PetitionCard
+        key={index}
+        agreeNum={data.likes}
+        type={props.type}
+        title={data.title}
+        content={data.content}
+        leftDate={data.d_day}
+        date={data.created_at}
+      />
+    ));
 
-    return (
-        <>
-            <Wrapper>
-                <Categorybar />
-                <Cards>
-                    <PetitionCard agreeNum={15} type={props.type} />
-                    <PetitionCard agreeNum={10} type={props.type} />
-                    <PetitionCard agreeNum={30} type={props.type} />
-                </Cards>
-                <Cards>
-                    <PetitionCard agreeNum={5} type={props.type} />
-                    <PetitionCard agreeNum={2} type={props.type} />
-                    <PetitionCard agreeNum={20} type={props.type} />
-                </Cards>
-            </Wrapper>
+  const art2 = registerData
+    .slice(3, 6)
+    .map((data, index) => (
+      <PetitionCard
+        key={index}
+        agreeNum={data.likes}
+        type={props.type}
+        title={data.title}
+        content={data.content}
+        leftDate={data.d_day}
+        date={data.created_at}
+      />
+    ));
 
-            {props.type}
-        </>
-    );
+  return (
+    <>
+      <Wrapper>
+        <Categorybar />
+        <Cards>{art1}</Cards>
+        <Cards>{art2}</Cards>
+      </Wrapper>
+
+      {props.type}
+    </>
+  );
 }
 
 export default Article;

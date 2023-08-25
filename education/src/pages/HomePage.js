@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
+import axios from "axios";
+import { getCookie } from "../API/Cookie";
+import PetitionCard from "../components/PetitonCard";
 
 function HomePage() {
   const [radio, setRadio] = useState("0");
@@ -9,6 +12,54 @@ function HomePage() {
     console.log(e.target.value);
     setRadio(e.target.value);
   };
+
+  const [registerData, setRegisterData] = useState({
+    category: "",
+    content: "",
+    created_at: "",
+    d_day: "",
+    id: "",
+    likes: "",
+    title: "",
+    writer: "",
+  });
+
+  const access = getCookie("accessToken");
+
+  const getArticle = async () => {
+    if (radio === "0" || radio === "1") {
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_BaseUrl}/sorted_posts/`,
+          {
+            headers: { Authorization: `Bearer ${access}` },
+          }
+        );
+        setRegisterData(res.data);
+      } catch (error) {
+        alert("오류가 발생했습니다. 다시 시도해주세요.");
+      }
+    } else {
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_BaseUrl}/posts/?order=latest`,
+          {
+            headers: { Authorization: `Bearer ${access}` },
+          }
+        );
+        setRegisterData(res.data);
+      } catch (error) {
+        alert("오류가 발생했습니다. 다시 시도해주세요.");
+      }
+    }
+  };
+
+  useEffect(() => {
+    getArticle();
+  }, [radio]);
+
+  console.log(registerData);
+
   return (
     <Container>
       <ButtonConatiner>
@@ -18,7 +69,7 @@ function HomePage() {
 
       <SearchBar />
 
-      <ArticleContainer>
+      <BottomContainer>
         <RadioBtnContainer>
           <input
             type="radio"
@@ -42,7 +93,8 @@ function HomePage() {
           />
           <label>최신 등록 순</label>
         </RadioBtnContainer>
-      </ArticleContainer>
+        <ArticleContainer></ArticleContainer>
+      </BottomContainer>
     </Container>
   );
 }
@@ -80,7 +132,12 @@ const Button = styled(Link)`
   margin: auto 15px;
 `;
 
-const ArticleContainer = styled.div``;
+const ArticleContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const BottomContainer = styled.div``;
 
 const RadioBtnContainer = styled.div`
   width: 80%;
