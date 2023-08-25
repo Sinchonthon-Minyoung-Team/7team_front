@@ -28,7 +28,7 @@ const LoginPage = () => {
             code,
           }
         );
-        const { data } = response.data;
+        const data = response.data;
         console.log(response);
         const accessToken = data.access;
         const refreshToken = data.refresh;
