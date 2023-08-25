@@ -8,6 +8,7 @@ import axios from "axios";
 import { getCookie } from "../../API/Cookie";
 
 function Article(props) {
+  
   const access = getCookie("accessToken");
 
   const getArticle = async () => {
@@ -25,26 +26,26 @@ function Article(props) {
     getArticle();
   }, []);
 
-  return (
-    <>
-      <Menu />
-      <Wrapper>
-        <Categorybar />
-        <Cards>
-          <PetitionCard agreeNum={15} type={props.type} />
-          <PetitionCard agreeNum={10} type={props.type} />
-          <PetitionCard agreeNum={30} type={props.type} />
-        </Cards>
-        <Cards>
-          <PetitionCard agreeNum={5} type={props.type} />
-          <PetitionCard agreeNum={2} type={props.type} />
-          <PetitionCard agreeNum={20} type={props.type} />
-        </Cards>
-      </Wrapper>
 
-      {props.type}
-    </>
-  );
+    return (
+        <>
+            <Wrapper>
+                <Categorybar />
+                <Cards>
+                    <PetitionCard agreeNum={15} type={props.type} />
+                    <PetitionCard agreeNum={10} type={props.type} />
+                    <PetitionCard agreeNum={30} type={props.type} />
+                </Cards>
+                <Cards>
+                    <PetitionCard agreeNum={5} type={props.type} />
+                    <PetitionCard agreeNum={2} type={props.type} />
+                    <PetitionCard agreeNum={20} type={props.type} />
+                </Cards>
+            </Wrapper>
+
+            {props.type}
+        </>
+    );
 }
 
 export default Article;
