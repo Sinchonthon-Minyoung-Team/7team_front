@@ -9,7 +9,7 @@ function NavBar() {
         <Logo to="/">UNIVPET</Logo>
         <UserContainer>
           <MyPage to="/mypage">마이페이지</MyPage>
-          <Sign to="/signup">회원가입 / 로그인</Sign>
+          <Sign to="/loginpage">회원가입 / 로그인</Sign>
         </UserContainer>
       </NavContainer>
       <Menu />
