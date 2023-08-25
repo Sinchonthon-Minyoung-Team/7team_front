@@ -8,6 +8,8 @@ import Article from "./pages/Board/Article";
 import MakePetition from "./pages/Board/MakePetition";
 import PetitionDetail from "./pages/Board/PetitionDetail";
 
+import SignUp from "./pages/SignUp";
+
 function App() {
     return (
         <>
@@ -16,6 +18,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/loginpage" element={<LoginPage />} />
+                    <Route path="/signup" element={<SignUp />} />
                     <Route path="/info" element={<About />} />
                     <Route
                         path="/progress"
